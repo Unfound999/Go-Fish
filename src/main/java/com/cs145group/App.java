@@ -24,6 +24,10 @@ public class App extends Application {
         stage.show();
     }
 
+    public static void setScene(String fxml) throws IOException {
+        scene.setRoot(FXMLLoader.load(App.class.getResource(fxml)));
+    }
+
     public static void main(String[] args) {
         launch();
     }
