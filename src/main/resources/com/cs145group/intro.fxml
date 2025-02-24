@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cs145group.IntroController">
+   <children>
+      <TextArea editable="false" prefHeight="471.0" prefWidth="600.0" text="Instructrions: Try and collect three cards of a kind. Request cards from the CPU's hand, to take said cards. If they don't have them, draw one card." wrapText="true" />
+      <HBox alignment="CENTER" prefHeight="203.0" prefWidth="600.0">
+         <children>
+            <Button mnemonicParsing="false" text="PLAY" fx:id="playBtn" onAction="#handlePlay"/>
+         </children></HBox>
+   </children>
+</VBox>
