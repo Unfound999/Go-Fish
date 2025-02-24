@@ -1,7 +1,11 @@
 package com.cs145group;
 
-//  temporary import for testing purposes (Current build does not have Chris')
+import java.util.Collections;
+import java.util.Random;
+
+//  temporary import as Chris's Stack file is not in this build
 import java.util.Stack;
+
 
 public class GoFishManager {
 
@@ -24,21 +28,28 @@ public class GoFishManager {
                     suit = Suit.SPADES;
                     break;
             } //  end of switch case
-            for (int j = 0; 14 > j; j++) {
-                deck.push(new CardTest(j+1, suit));
+            for (int j = 0; 13 > j; j++) {
+                deck.push(new CardTest(j+2, suit));
 
-                //  Temporary line for testing purposes (ensure that the deck is being created correctly)
+                //  Temporary lines for testing purposes (ensure that the deck is being created correctly)
                 System.out.printf("%d%s%s%n", deck.peek().getRank(), " of ", deck.peek().getSuit());
             } //  ends nested for loop
         } //  ends for loop
+        System.out.println();
     } //  ends createDeck method
 
+    public static void shuffleDeck(Stack<CardTest> deck) {
 
+        Collections.shuffle(deck, new Random());
+
+        // Temporary line for testing purposes (ensure that the order of cards in deck are being randomized)
+        System.out.printf("%d%s%s", deck.peek().getRank(), " of ", deck.peek().getSuit());
+    } //  end of shuffleDeck method
 
     //  main method for testing purposes
     public static void main(String[] args) {
         Stack<CardTest> deck = new Stack<CardTest>();
         createDeck(deck);
-        
+        shuffleDeck(deck);
     } //  ends main method
 } // ends GoFishManager class

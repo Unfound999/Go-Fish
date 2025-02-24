@@ -13,8 +13,8 @@ enum Suit {
 //  temporary class for testing GoFishManager class
 public class CardTest {
 
-    private static int rank;
-    private static Suit suit;
+    private int rank;
+    private Suit suit;
 
 
     public CardTest(int rank, Suit suit) {
@@ -22,7 +22,7 @@ public class CardTest {
         this.suit = suit;
 }
 
-    public static int getRank() {
+    public int getRank() {
         return rank;
     }
 
@@ -30,7 +30,7 @@ public class CardTest {
         this.rank = rank;
     }
 
-    public static Suit getSuit() {
+    public Suit getSuit() {
         return suit;
     }
 
