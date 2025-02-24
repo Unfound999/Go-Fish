@@ -55,7 +55,25 @@ public class GoFishManager {
         } //  end of for loop
     } //  end of dealCards method
 
-    //  main method for testing purposes
+    public static void askCard(CardTest card, ArrayList<CardTest> grabberHand, ArrayList<CardTest> grabbeeHand) {
+
+        //  Change to a regular array
+        ArrayList<Integer>cardLocation = new ArrayList<>();
+
+        for (int i = 0; grabbeeHand.size() > i; i++) {
+            if (card.getRank() == grabbeeHand.get(i).getRank()) {
+                grabberHand.add(grabbeeHand.get(i));
+                cardLocation.add(i);
+            } //  end of if statement
+        } //  end of for loop
+        
+        if (!cardLocation.isEmpty()) {
+            
+        } // end of if else statement
+
+    } //  end of askCard method
+
+    //  temporary main method for testing purposes
     public static void main(String[] args) {
 
         Stack<CardTest> deck = new Stack<CardTest>();
@@ -71,6 +89,20 @@ public class GoFishManager {
         createDeck(deck);
         shuffleDeck(deck);
         dealCards(deck, userHand, cpuHand);
+
+        // temporary for loops for testing purposes
+        System.out.println("Dealt User Hand");
+        for (int i = 0; userHand.size() > i; i++) {
+            System.out.printf("%d%s%s%n", userHand.get(i).getRank(), " of ", userHand.get(i).getSuit());
+        }
+        System.out.println("\nDealt cpu hand");
+        for (int i = 0; cpuHand.size() > i; i++) {
+            System.out.printf("%d%s%s%n", cpuHand.get(i).getRank(), " of ", cpuHand.get(i).getSuit());
+        }
+
+        System.out.println();
+
+        askCard(userHand.get(0), userHand, cpuHand);
 
         // temporary for loops for testing purposes
         System.out.println("Dealt User Hand");
