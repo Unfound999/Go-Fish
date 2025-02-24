@@ -44,4 +44,14 @@ public class Stack<T> {
     public int getCurrentLocation(){
         return this.top;
     }
+
+    public void shuffle(){
+        Random random = new Random();
+        for(int i = this.stackData.length-1; i>0; i--){
+            int rnd_index = random.nextInt(i+1);
+            T item1 = this.stackData[i];
+            this.stackData[i] = this.stackData[rnd_index];
+            this.stackData[rnd_index] = item1;
+        }
+    }
 }
