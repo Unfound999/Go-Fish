@@ -6,6 +6,7 @@
 package com.cs145group;
 
 import java.lang.reflect.Array;
+import java.util.Random;
 
 public class Stack<T> {
     private T[] stackData;
