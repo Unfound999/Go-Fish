@@ -73,6 +73,40 @@ public class GoFishManager {
         } //  end of for loop
     } //  end of askCard method
 
+    public static String toString(CardTest card) {
+
+        String rank = Integer.toString(card.getRank());
+        String suit = " ";
+
+        switch (rank) {
+            case("11"):
+            break;
+            case("12"):
+            break;
+            case("13"):
+            break;
+            case("14"):
+            break;
+        }
+
+        switch (card.getSuit()) {
+            case DIAMONDS:
+            suit = "Diamonds";
+            break;
+            case HEARTS:
+            suit = "Hearts";
+            break;
+            case SPADES:
+            suit = "Spades";
+            break;
+            case CLUBS:
+            suit = "Clubs";
+            break;
+        } //  end of switch case statement
+
+        return suit + " " + rank;
+    } //  end of toString method
+
     //  temporary main method for testing purposes
     public static void main(String[] args) {
 
@@ -113,5 +147,8 @@ public class GoFishManager {
         for (int i = 0; cpuHand.size() > i; i++) {
             System.out.printf("%d%s%s%n", cpuHand.get(i).getRank(), " of ", cpuHand.get(i).getSuit());
         }
+
+        System.out.println("\nString version of card object data");
+        System.out.print(toString(userHand.get(0)));
     } //  ends main method
 } // ends GoFishManager class
