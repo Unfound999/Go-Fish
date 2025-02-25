@@ -18,16 +18,16 @@ public class Stack<T> {
         this.stackData = (T[])Array.newInstance(type, size);
     }
 
-    public T pop() throws Exception{
+    public T pop() throws StackOverflowError{
         if(this.top < 0){
-            throw new Exception("StackUnderflow.");
+            throw new StackOverflowError("StackUnderflow.");
         }
         T outGoing = this.stackData[top];
         this.top--;
         return outGoing;
     }
 
-    public T peak(){
+    public T peek(){
         return this.stackData[top];
     }
 
