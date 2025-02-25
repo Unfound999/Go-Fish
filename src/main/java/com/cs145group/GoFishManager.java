@@ -1,10 +1,6 @@
 package com.cs145group;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-
-import javafx.css.Declaration;
 //import java.util.Stack;
 
 
