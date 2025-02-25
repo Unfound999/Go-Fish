@@ -1,9 +1,8 @@
 package com.cs145group;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-
 import java.io.IOException;
+
+import javafx.fxml.FXML;
 
 public class IntroController {
 
