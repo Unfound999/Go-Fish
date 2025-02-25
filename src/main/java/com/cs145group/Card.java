@@ -6,7 +6,7 @@ public class Card {
     private cardType suit;
 
     public int getRank() { return this.rank; }
-    public cardType suit() { return this.suit; }
+    public cardType getSuit() { return this.suit; }
 
     public Card(cardType suit, int rank) {
 

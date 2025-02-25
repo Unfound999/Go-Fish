@@ -5,19 +5,19 @@ import java.util.ArrayList;
 //  This class is temporary for testing the methods in the GoFishManager class
 
 public class Player {
-    private ArrayList<CardTest> hand;
+    private ArrayList<Card> hand;
     private int score;
 
-    public Player(ArrayList<CardTest> hand, int score) {
+    public Player(ArrayList<Card> hand, int score) {
         this.hand = hand;
         this.score = score;
     }
 
-    public ArrayList<CardTest> getHand() {
+    public ArrayList<Card> getHand() {
         return hand;
     }
 
-    public void setHand(ArrayList<CardTest> hand) {
+    public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
     }
 
