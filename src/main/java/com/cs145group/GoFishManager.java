@@ -3,7 +3,9 @@ package com.cs145group;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import java.util.Stack;
+
+import javafx.css.Declaration;
+//import java.util.Stack;
 
 
 public class GoFishManager {
@@ -41,7 +43,7 @@ public class GoFishManager {
 
     public static void shuffleDeck(Stack<Card> deck) {
 
-        Collections.shuffle(deck, new Random());
+        deck.shuffle();
 
         // Temporary line for testing purposes (ensure that the order of cards in deck are being randomized)
         System.out.println("Shuffled deck top card");
@@ -114,7 +116,7 @@ public class GoFishManager {
     //  temporary main method for testing purposes
     public static void main(String[] args) {
 
-        Stack<Card> deck = new Stack<Card>();
+        Stack<Card> deck = new Stack<Card>(Card.class, 52);
         ArrayList<Card> userHand = new ArrayList<>();
         ArrayList<Card> cpuHand = new ArrayList<>();
 
