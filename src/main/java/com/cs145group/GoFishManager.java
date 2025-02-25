@@ -80,12 +80,16 @@ public class GoFishManager {
 
         switch (rank) {
             case("11"):
+            rank = "Jack";
             break;
             case("12"):
+            rank = "Queen";
             break;
             case("13"):
+            rank = "King";
             break;
             case("14"):
+            rank = "Ace";
             break;
         }
 
