@@ -152,8 +152,9 @@ public class GameController {
             showSelectAlert();
             return;
         }
-        this.gameManager.userPlayHand(selectedCard);
-        this.gameManager.cpuTurn();
+        if(!this.gameManager.userPlayHand(selectedCard)){
+            this.gameManager.cpuTurn();
+        }
         this.cardList.setItems(FXCollections.observableList(this.gameManager.getUserHand()));
         updateText();
         switch (this.gameManager.checkWinState()) {

@@ -96,22 +96,25 @@ public class GoFishManager {
         } //  end of for loop
     } //  end of dealCards method
 
-    public void userPlayHand(Card card) {
-        askCard(card, this.userHand, this.CPUHand);
+    public boolean userPlayHand(Card card) {
+        Boolean result = askCard(card, this.userHand, this.CPUHand);
         if(playBook(this.userHand)){
             userScore++;
         };
+        return result;
     } //  end of userPlayHand method
 
     public void cpuPlayHand(Card card) {
-        askCard(card, this.CPUHand, this.userHand);
-        if(playBook(this.CPUHand)){
-            cpuScore++;
-        }
-        playBook(this.CPUHand);
+        boolean result;
+        do {
+            result = askCard(card, this.CPUHand, this.userHand);
+            if(playBook(this.CPUHand)){
+                cpuScore++;
+            }
+        } while(result);
     } //  end of userPlayHand method
 
-    public void askCard(Card card, ArrayList<Card> grabberHand, ArrayList<Card> grabbeeHand) {
+    public boolean askCard(Card card, ArrayList<Card> grabberHand, ArrayList<Card> grabbeeHand) {
 
         boolean cardObtain = false;
 
@@ -135,6 +138,7 @@ public class GoFishManager {
             recieveCard(grabberHand);
         }
 
+        return cardObtain;
     } //  end of askCard method
 
     public void recieveCard(ArrayList<Card> hand) {
