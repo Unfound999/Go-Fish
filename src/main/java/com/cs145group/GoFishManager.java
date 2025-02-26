@@ -150,7 +150,7 @@ public class GoFishManager {
         if (!cardObtain) {
             recieveCard(grabberHand);
         }
-        
+
     } //  end of askCard method
 
     //  if the deck still contains cards, remove top card from deck and add it to current hand
@@ -164,9 +164,6 @@ public class GoFishManager {
         //  adds a card from the deck to the current hand
         hand.add(this.deck.pop());
     } //  end of recieveCard method
-
-    //Generate number size of hand
-    //Call playtest method at the index of the random number
 
     //This method adds a imlpementation of the CPU's turn in the game. It checks if the CPU's hand size is 0 and then if it's not it
     //creates a random number that can be used as a reference to grab a CPU card. 
