@@ -14,6 +14,20 @@ public class Card {
         this.rank = rank;
     }
 
+    @Override
+    public boolean equals(Object otherObj){
+        if(!(otherObj instanceof Card)){
+            return false;
+        }
+        Card other = (Card)otherObj;
+        if(other.getRank() == this.rank && other.getSuit() == this.suit){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     // Citation: https://stackoverflow.com/questions/3904579/how-to-capitalize-the-first-letter-of-a-string-in-java
     public String toString(){
         String suitName = this.suit.name();
