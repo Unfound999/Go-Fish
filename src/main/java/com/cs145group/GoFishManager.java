@@ -14,7 +14,7 @@ public class GoFishManager {
     private int userScore = 0;
 
     public String checkWinState(){
-        if(this.userHand.size() == 0 || this.CPUHand.size() == 0){
+        if(this.userHand.size() == 0 || this.CPUHand.size() == 0 || deck.getCurrentLocation() == 0){
             if(this.cpuScore < this.userScore){
                 return "win";
             }
