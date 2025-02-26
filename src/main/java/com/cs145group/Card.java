@@ -20,7 +20,7 @@ public class Card {
             return false;
         }
         Card other = (Card)otherObj;
-        if(other.getRank() == this.rank && other.getSuit() == this.suit){
+        if(other.getRank() == this.rank){
             return true;
         }
         else {
