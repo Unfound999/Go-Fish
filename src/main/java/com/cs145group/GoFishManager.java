@@ -89,7 +89,6 @@ public class GoFishManager {
         if(playBook(this.userHand)){
             this.userScore++;
         };
-        playBook(this.userHand);
     } //  end of userPlayHand method
 
     public void cpuPlayHand(Card card) {
@@ -97,7 +96,6 @@ public class GoFishManager {
         if(playBook(this.CPUHand)){
             this.cpuScore++;
         }
-        playBook(this.CPUHand);
     } //  end of userPlayHand method
 
     public void askCard(Card card, ArrayList<Card> grabberHand, ArrayList<Card> grabbeeHand) {
