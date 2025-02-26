@@ -167,16 +167,22 @@ public class GoFishManager {
 
     //Generate number size of hand
     //Call playtest method at the index of the random number
+
+    //This method adds a imlpementation of the CPU's turn in the game. It checks if the CPU's hand size is 0 and then if it's not it
+    //creates a random number that can be used as a reference to grab a CPU card. 
     public void cpuTurn() {
         if(CPUHand.size() == 0){
             return;
         }
-        Random randomNum = new SecureRandom();
-        int randomCPU = randomNum.nextInt(this.CPUHand.size());
+        Random randomObj = new SecureRandom();
+        //creates random number that can be used as a reference to grab a card out of the CPU's hand
+        int randomCPUNum = randomObj.nextInt(this.CPUHand.size());
 
-        cpuPlayHand(this.CPUHand.get(randomCPU));
+        cpuPlayHand(this.CPUHand.get(randomCPUNum));
     }
 
+    //This method implements the ability to play a book of cards. The method checks for a 
+    //book of cards by looping through each card in the player's or the CPU's deck.
     public boolean playBook(ArrayList<Card> hand) {
 
         for(int i = 0; i < hand.size(); i++) {
@@ -189,7 +195,9 @@ public class GoFishManager {
 
                     continue;
                 }
+
                 Card secondCard = hand.get(j);
+                
                 if(firstCard.equals(secondCard)) {
 
                     for(int k = 0; k < hand.size(); k++) {
