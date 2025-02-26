@@ -9,10 +9,20 @@ public class GoFishManager {
     
     private Stack<Card> deck;
     private ArrayList<Card> userHand;
+
+    public ArrayList<Card> getUserHand() {
+        return userHand;
+    }
+
     private ArrayList<Card> CPUHand;
     
     public GoFishManager(){
-        this.deck = new Stack<>(Card.class, 52);
+        this.deck = new Stack<Card>(Card.class, 52);
+        this.userHand = new ArrayList<>();
+        this.CPUHand = new ArrayList<>();
+        createDeck();
+        shuffleDeck();
+        dealCards();
     }
 
     //  creates deck of card objects and places them in a stack
@@ -96,44 +106,6 @@ public class GoFishManager {
 
     } //  end of askCard method
 
-    public String toString(Card card) {
-
-        String rank = Integer.toString(card.getRank());
-        String suit = " ";
-
-        switch (rank) {
-            case("11"):
-            rank = "Jack";
-            break;
-            case("12"):
-            rank = "Queen";
-            break;
-            case("13"):
-            rank = "King";
-            break;
-            case("14"):
-            rank = "Ace";
-            break;
-        } //  end of switch case
-
-        switch (card.getSuit()) {
-            case DIAMONDS:
-            suit = "Diamonds";
-            break;
-            case HEARTS:
-            suit = "Hearts";
-            break;
-            case SPADES:
-            suit = "Spades";
-            break;
-            case CLUBS:
-            suit = "Clubs";
-            break;
-        } //  end of switch case statement
-
-        return suit + " " + rank;
-    } //  end of toString method
-
     public void recieveCard(ArrayList<Card> hand) {
         hand.add(this.deck.pop());
     } //  end of recieveCard method
@@ -183,17 +155,4 @@ public class GoFishManager {
             }
         }
     }
-
-    //  temporary main method for testing purposes
-    public static void main(String[] args) {
-
-        GoFishManager manager = new GoFishManager();
-
-        int userScore = 0;
-        int cpuScore = 0;
-
-        manager.createDeck();
-        manager.shuffleDeck();
-        manager.dealCards();
-    } //  ends main method
 } // ends GoFishManager class
