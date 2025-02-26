@@ -1,15 +1,22 @@
 package com.cs145group;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
-import java.util.Stack;
 
 
 public class GoFishManager {
+    
+    private Stack<Card> deck;
+    private ArrayList<Card> userHand;
+    private ArrayList<Card> CPUHand;
+    
+    public GoFishManager(){
+        this.deck = new Stack<>(Card.class, 52);
+    }
 
     //  creates deck of card objects and places them in a stack
-    public static void createDeck(Stack<Card> deck) {
+    public void createDeck() {
 
         //  initializes suit enum variable
         cardType suit = cardType.DIAMONDS;
@@ -30,38 +37,49 @@ public class GoFishManager {
                     break;
             } //  end of switch case
             for (int j = 0; 13 > j; j++) {
-                deck.push(new Card(suit, j+2));
+                this.deck.push(new Card(suit, j+2));
 
                 //  Temporary lines for testing purposes (ensure that the deck is being created correctly)
-                System.out.printf("%d%s%s%n", deck.peek().getRank(), " of ", deck.peek().getSuit());
+                System.out.printf("%d%s%s%n", this.deck.peek().getRank(), " of ", this.deck.peek().getSuit());
             } //  ends nested for loop
         } //  ends for loop
         System.out.println();
     } //  ends createDeck method
 
-    public static void shuffleDeck(Stack<Card> deck) {
+    public void shuffleDeck() {
 
-        Collections.shuffle(deck, new Random());
+        this.deck.shuffle();
 
         // Temporary line for testing purposes (ensure that the order of cards in deck are being randomized)
         System.out.println("Shuffled deck top card");
-        System.out.printf("%d%s%s%n%n", deck.peek().getRank(), " of ", deck.peek().getSuit());
+        System.out.printf("%d%s%s%n%n", this.deck.peek().getRank(), " of ", this.deck.peek().getSuit());
     } //  end of shuffleDeck method
 
-    public static void dealCards(Stack<Card> deck, ArrayList<Card> userHand, ArrayList<Card> cpuHand) {
+    public void dealCards() {
         for (int i = 0; 5 > i; i++) {
-            userHand.add(deck.pop());
-            cpuHand.add(deck.pop());
+            this.userHand.add(this.deck.pop());
+            this.CPUHand.add(this.deck.pop());
         } //  end of for loop
     } //  end of dealCards method
 
-    public static void askCard(Card card, ArrayList<Card> grabberHand, ArrayList<Card> grabbeeHand) {
+    public void userPlayHand(Card card) {
+        askCard(card, this.userHand, this.CPUHand);
+    } //  end of userPlayHand method
+
+    public void cpuPlayHand(Card card) {
+        askCard(card, this.CPUHand, this.userHand);
+    } //  end of userPlayHand method
+
+    public void askCard(Card card, ArrayList<Card> grabberHand, ArrayList<Card> grabbeeHand) {
+
+        boolean cardObtain = false;
 
         int handAdjust = 0;
 
         for (int i = 0; grabbeeHand.size() > i; i++) {
             if (card.getRank() == grabbeeHand.get(i).getRank()) {
                 grabberHand.add(grabbeeHand.get(i));
+                cardObtain = true;
             } //  end of if statement
         } //  end of for loop
 
@@ -71,9 +89,14 @@ public class GoFishManager {
                 handAdjust++;
             } //  end of if statement
         } //  end of for loop
+
+        if (!cardObtain) {
+            recieveCard(grabberHand);
+        }
+
     } //  end of askCard method
 
-    public static String toString(Card card) {
+    public String toString(Card card) {
 
         String rank = Integer.toString(card.getRank());
         String suit = " ";
@@ -111,48 +134,66 @@ public class GoFishManager {
         return suit + " " + rank;
     } //  end of toString method
 
+    public void recieveCard(ArrayList<Card> hand) {
+        hand.add(this.deck.pop());
+    } //  end of recieveCard method
+
+    //Generate number size of hand
+    //Call playtest method at the index of the random number
+    public void cpuTurn() {
+
+        Random randomNum = new SecureRandom();
+        int randomCPU = randomNum.nextInt(this.CPUHand.size());
+
+        cpuPlayHand(this.CPUHand.get(randomCPU));
+    }
+
+    public void playBook(ArrayList<Card> hand) {
+
+        for(int i = 0; i < hand.size(); i++) {
+
+            int firstCard = hand.get(i).getRank();
+
+            for(int j = 0; j < hand.size(); j++) {
+
+                if(i == j) {
+
+                    continue;
+                }
+                int secondCard = hand.get(j).getRank();
+                if(firstCard == secondCard) {
+
+                    for(int k = 0; k < hand.size(); k++) {
+
+                        if(i == k || k == j) {
+
+                            continue;
+                        }
+
+                        int thirdCard = hand.get(k).getRank();
+
+                        if(thirdCard == secondCard && secondCard == firstCard) {
+
+                            hand.remove(i);
+                            hand.remove(j);
+                            hand.remove(k);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     //  temporary main method for testing purposes
     public static void main(String[] args) {
 
-        Stack<Card> deck = new Stack<Card>();
-        ArrayList<Card> userHand = new ArrayList<>();
-        ArrayList<Card> cpuHand = new ArrayList<>();
+        GoFishManager manager = new GoFishManager();
 
         int userScore = 0;
         int cpuScore = 0;
 
-        Player user = new Player(userHand, userScore);
-        Player cpu = new Player(cpuHand, cpuScore);
-
-        createDeck(deck);
-        shuffleDeck(deck);
-        dealCards(deck, userHand, cpuHand);
-
-        // temporary for loops for testing purposes
-        System.out.println("Dealt User Hand");
-        for (int i = 0; userHand.size() > i; i++) {
-            System.out.printf("%d%s%s%n", userHand.get(i).getRank(), " of ", userHand.get(i).getSuit());
-        }
-        System.out.println("\nDealt cpu hand");
-        for (int i = 0; cpuHand.size() > i; i++) {
-            System.out.printf("%d%s%s%n", cpuHand.get(i).getRank(), " of ", cpuHand.get(i).getSuit());
-        }
-
-        System.out.println();
-
-        askCard(userHand.get(0), userHand, cpuHand);
-
-        // temporary for loops for testing purposes
-        System.out.println("asked card User Hand");
-        for (int i = 0; userHand.size() > i; i++) {
-            System.out.printf("%d%s%s%n", userHand.get(i).getRank(), " of ", userHand.get(i).getSuit());
-        }
-        System.out.println("\nasked card Dealt cpu hand");
-        for (int i = 0; cpuHand.size() > i; i++) {
-            System.out.printf("%d%s%s%n", cpuHand.get(i).getRank(), " of ", cpuHand.get(i).getSuit());
-        }
-
-        System.out.println("\nString version of card object data");
-        System.out.print(toString(userHand.get(0)));
+        manager.createDeck();
+        manager.shuffleDeck();
+        manager.dealCards();
     } //  ends main method
 } // ends GoFishManager class
