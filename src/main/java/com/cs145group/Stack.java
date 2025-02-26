@@ -19,10 +19,11 @@ public class Stack<T> {
     }
 
     public T pop() throws StackOverflowError{
-        if(this.top < 0){
+        if(this.top <= 0){
             throw new StackOverflowError("StackUnderflow.");
         }
         T outGoing = this.stackData[top-1];
+        this.stackData[top-1] = null;
         this.top--;
         return outGoing;
     }
@@ -53,6 +54,16 @@ public class Stack<T> {
             T item1 = this.stackData[i];
             this.stackData[i] = this.stackData[rnd_index];
             this.stackData[rnd_index] = item1;
+        }
+    }
+
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>(Integer.class, 5);
+        for(int i = 0; i<stack.getSize(); i++){
+            stack.push(i);
+        }
+        for(int i = stack.getSize(); i>0; i--){
+            System.out.println(stack.pop());
         }
     }
 }
