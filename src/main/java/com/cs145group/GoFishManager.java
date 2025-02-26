@@ -13,6 +13,18 @@ public class GoFishManager {
     private int cpuScore = 0;
     private int userScore = 0;
 
+    public int getCpuScore() {
+        return this.cpuScore;
+    }
+
+    public int getUserScore() {
+        return this.userScore;
+    }
+
+    public int getDeckLocation(){
+        return this.deck.getCurrentLocation();
+    }
+
     public String checkWinState(){
         if(this.userHand.size() == 0 || this.CPUHand.size() == 0 || deck.getCurrentLocation() == 0){
             if(this.cpuScore < this.userScore){
