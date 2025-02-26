@@ -14,6 +14,12 @@ public class Card {
         this.rank = rank;
     }
 
+    // Citation: https://stackoverflow.com/questions/3904579/how-to-capitalize-the-first-letter-of-a-string-in-java
+    public String toString(){
+        String suitName = this.suit.name();
+        return String.format("%s, %d", suitName.substring(0,1) + suitName.substring(1).toLowerCase(), this.rank);
+    }
+
 }
 
 enum cardType {
