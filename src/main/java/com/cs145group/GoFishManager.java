@@ -109,6 +109,10 @@ public class GoFishManager {
         return suit + " " + rank;
     } //  end of toString method
 
+    public static void recieveCard(Stack<Card> deck, ArrayList<Card> hand) {
+        hand.add(deck.pop());
+    } //  end of recieveCard method
+
     //  temporary main method for testing purposes
     public static void main(String[] args) {
 
