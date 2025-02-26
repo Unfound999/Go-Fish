@@ -36,11 +36,22 @@ public class GameController {
     @FXML
     private Label cpuCardText; // The Label saying how many cards the CPU has in their hand.
 
+    @FXML
+    private Label playScoreText;
+
+    @FXML
+    private Label cpuScoreText;
+
+    @FXML
+    private Label deckRemainder;
     /*
      * Void Method,
-     * Updates the CPU card text with the current size of their hand.
+     * Updates all the labels with the proper values coming from the game manager.
      */
-    public void updateCPUText(){
+    public void updateText(){
+        this.playScoreText.setText(String.format("Player Score: %d", gameManager.getUserScore()));
+        this.cpuScoreText.setText(String.format("CPU Score: %d", gameManager.getCpuScore()));
+        this.deckRemainder.setText(String.format("Deck Remainder: %d", gameManager.getDeckLocation()));
         this.cpuCardText.setText(String.format("CPU Remaining Cards: %d", gameManager.getCPUHandSize()));
     }
 
@@ -123,7 +134,7 @@ public class GameController {
             }
         });
 
-        updateCPUText();
+        updateText();
     }
 
     /*
@@ -144,7 +155,7 @@ public class GameController {
         this.gameManager.userPlayHand(selectedCard);
         this.gameManager.cpuTurn();
         this.cardList.setItems(FXCollections.observableList(this.gameManager.getUserHand()));
-        updateCPUText();
+        updateText();
         switch (this.gameManager.checkWinState()) {
             case "win":
             showWinAlert();
