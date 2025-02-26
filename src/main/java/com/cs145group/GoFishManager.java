@@ -87,14 +87,15 @@ public class GoFishManager {
     public void userPlayHand(Card card) {
         askCard(card, this.userHand, this.CPUHand);
         if(playBook(this.userHand)){
-            userScore++;
+            this.userScore++;
         };
+        playBook(this.userHand);
     } //  end of userPlayHand method
 
     public void cpuPlayHand(Card card) {
         askCard(card, this.CPUHand, this.userHand);
         if(playBook(this.CPUHand)){
-            cpuScore++;
+            this.cpuScore++;
         }
         playBook(this.CPUHand);
     } //  end of userPlayHand method
