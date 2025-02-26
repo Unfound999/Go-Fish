@@ -7,17 +7,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cs145group.GameController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cs145group.GameController">
    <children>
       <ListView fx:id="cardList" prefHeight="353.0" prefWidth="600.0" />
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Request" fx:id="requestBtn" onAction="#requestCard" />
-            <Label alignment="CENTER" text="CPU Remaining Cards: 0" fx:id="cpuCardText">
+            <HBox alignment="CENTER_RIGHT" prefHeight="74.0" prefWidth="330.0">
+               <children>
+                  <Button fx:id="requestBtn" mnemonicParsing="false" onAction="#requestCard" text="Request" />
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="74.0" prefWidth="271.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets />
                </HBox.margin>
-            </Label>
+               <children>
+                  <Label text="Player Score: 0" fx:id="playScoreText" />
+                  <Label text="CPU Score: 0" fx:id="cpuScoreText" />
+                  <Label text="Deck Remainder: 0" fx:id="deckRemainder" />
+                  <Label fx:id="cpuCardText" alignment="CENTER" text="CPU Remaining Cards: 0" />
+               </children>
+            </VBox>
          </children>
       </HBox>
    </children>
