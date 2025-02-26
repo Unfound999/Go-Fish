@@ -22,20 +22,20 @@ public class Stack<T> {
         if(this.top < 0){
             throw new StackOverflowError("StackUnderflow.");
         }
-        T outGoing = this.stackData[top];
+        T outGoing = this.stackData[top-1];
         this.top--;
         return outGoing;
     }
 
     public T peek(){
-        return this.stackData[top];
+        return this.stackData[top-1];
     }
 
     public void push(T item) throws StackOverflowError{
         if(this.top + 1 > this.stackData.length){
             throw new StackOverflowError();
         }
-        this.stackData[++this.top] = item;
+        this.stackData[this.top++] = item;
     }
 
     public int getSize(){
