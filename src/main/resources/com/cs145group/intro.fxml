@@ -5,7 +5,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cs145group.IntroController">
    <children>
-      <TextArea editable="false" prefHeight="471.0" prefWidth="600.0" text="Instructions: Go Fish is a game about matching cards. When you have three cards of the same rank, you play the book, and get one point. You can take your opponents cards, by request them by rank, if you have one of the same rank in your hand. The game ends, when a player has no cards remaining in their hand, or when the deck is empty. Highest score wins." wrapText="true" />
+      <TextArea editable="false" prefHeight="471.0" prefWidth="600.0" text="Instructions: Go Fish is a game about matching cards. When you have three cards of the same rank, you play the book, and get one point. You can take your opponents cards, by request them by rank, if you have one of the same rank in your hand. If you get cards, you get to take a second turn. The game ends, when a player has no cards remaining in their hand, or when the deck is empty. Highest score wins." wrapText="true" />
       <HBox alignment="CENTER" prefHeight="203.0" prefWidth="600.0">
          <children>
             <Button mnemonicParsing="false" text="PLAY" fx:id="playBtn" onAction="#handlePlay"/>
