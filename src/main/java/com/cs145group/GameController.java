@@ -14,28 +14,42 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 
+/* Game Controller Class
+ * This class is the core of the GUI aspect of our program.
+ * It essentially ties UI elements and events to calls of the encapsulated GoFishManager class, which holds our game logic.
+ */
 public class GameController {
 
+    // Our properties
     private GoFishManager gameManager;
-    private Card selectedCard;
+    private Card selectedCard; // The card selected in the List View.
 
     @FXML
-    private ListView<Card> cardList;
+    private ListView<Card> cardList; // The List View of our cards, specified via the ID in the FXML with fx:id.
 
     @FXML
-    private Label cpuCardText;
+    private Label cpuCardText; // The Label saying how many cards the CPU has in their hand.
 
+    /*
+     * Void Method,
+     * Updates the CPU card text with the current size of their hand.
+     */
     public void updateCPUText(){
         this.cpuCardText.setText(String.format("CPU Remaining Cards: %d", gameManager.getCPUHandSize()));
     }
 
+    /* Void Method
+     * Handles the response to both result dialogs, reloading the scene, hence restarting the game
+     * if the player opts to play again. Otherwise quits the program gracefully.
+     * Parameters:
+     *  response (ButtonType) - The button which was selected in the dialog.
+     */
     public static void handleWinResponse(ButtonType response){
         if(response.getButtonData() == ButtonData.YES ){
             try{
@@ -49,7 +63,10 @@ public class GameController {
         }
     }
 
-    public void showSelectAlert(){
+    /* Void Method
+     * Builds and shows the Alert to be shown if the player hasn't selected a cart when clicking the request button.
+     */
+    public static void showSelectAlert(){
         Alert invalidAlert = new Alert(AlertType.INFORMATION);
         invalidAlert.setTitle("Invalid Selection");
         invalidAlert.setHeaderText("");
@@ -57,7 +74,10 @@ public class GameController {
         invalidAlert.showAndWait();
     }
 
-    public void showWinAlert(){
+    /* Void Method
+     * Builds and shows the Alert to be shown when the player Wins a game.
+     */
+    public static void showWinAlert(){
         ButtonType yes = new ButtonType("Yes", ButtonData.YES);
         ButtonType no = new ButtonType("No", ButtonData.NO);
         Alert invalidAlert = new Alert(AlertType.CONFIRMATION, null, yes, no);
@@ -67,7 +87,10 @@ public class GameController {
         invalidAlert.showAndWait().ifPresent(GameController::handleWinResponse);;
     }
 
-    public void showLoseAlert(){
+    /* Void Method
+     * Builds and shows the Alert to be shown when the player loses a game.
+     */
+    public static void showLoseAlert(){
         ButtonType yes = new ButtonType("Yes", ButtonData.YES);
         ButtonType no = new ButtonType("No", ButtonData.NO);
         Alert invalidAlert = new Alert(AlertType.ERROR, null, yes, no);
@@ -77,6 +100,15 @@ public class GameController {
         invalidAlert.showAndWait().ifPresent(GameController::handleWinResponse);;
     }
 
+    /*
+     * Void Initializer method.
+     * This method is essentially our constructor, in JavaFX.
+     * Called automatically as part of the construction of the scene.
+     * This method initializes our gameManager property, sets our listView to the list of Cards
+     * In the User's hand property in the Game Manager, by converting the Arraylist to an ObservableList.
+     * We also create the event handler for changing the Selection in the list view, updating the selected card property.
+     * Finally, we call updateCPUText to show the initial number of cards in the CPU's hand.
+     */
     @FXML
     public void initialize(){
         gameManager = new GoFishManager();
@@ -94,6 +126,15 @@ public class GameController {
         updateCPUText();
     }
 
+    /*
+     * Void Method (Button Click Event Handler)
+     * Specified in our game.fxml, this method is called when the request button is clicked.
+     * This method, which admittedly is probably doing too much heavy lifting
+     * calls the gameManager, set up during initialization playing the currently selected card.
+     * After playing our hand, we tell the gameManager to play the CPU's hand.
+     * We then update the Listview, and cpu hand text, to reflect the changes made during the class.
+     * Finally, we check in case the game ended during those two calls, if it does, we show the proper alert.
+     */
     @FXML
     public void requestCard(){
         if(selectedCard == null) {
