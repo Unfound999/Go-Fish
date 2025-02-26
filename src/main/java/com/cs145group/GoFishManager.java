@@ -97,32 +97,31 @@ public class GoFishManager {
     } //  end of dealCards method
 
     //  runs player's turn and checks if a book can be played
-    public void userPlayHand(Card card) {
-
-        askCard(card, this.userHand, this.CPUHand);
+    public boolean userPlayHand(Card card) {
+        Boolean result = askCard(card, this.userHand, this.CPUHand);
 
         if(playBook(this.userHand)){
             this.userScore++;
         }
-
+        return result;
     } //  end of userPlayHand method
 
     //  runs cpu's turn and checks if a book can be played
     public void cpuPlayHand(Card card) {
-
-        askCard(card, this.CPUHand, this.userHand);
-
-        if(playBook(this.CPUHand)){
-            this.cpuScore++;
-        }
-
+        boolean result;
+        do {
+            result = askCard(card, this.CPUHand, this.userHand);
+            if(playBook(this.CPUHand)){
+                cpuScore++;
+            }
+        } while(result);
     } //  end of userPlayHand method
 
     /*  checks if selected card's rank is equal to any card in player/cpu's hand
      *  if there is a match, add matching card to hand of asking player/cpu's hand
      *  if there is a match, remove card from other player/cpu's hand
     */
-    public void askCard(Card card, ArrayList<Card> grabberHand, ArrayList<Card> grabbeeHand) {
+    public boolean askCard(Card card, ArrayList<Card> grabberHand, ArrayList<Card> grabbeeHand) {
 
         //  boolean variable for if a match is identified
         boolean cardObtain = false;
@@ -151,6 +150,7 @@ public class GoFishManager {
             recieveCard(grabberHand);
         }
 
+        return cardObtain;
     } //  end of askCard method
 
     //  if the deck still contains cards, remove top card from deck and add it to current hand
